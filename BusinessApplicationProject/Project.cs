@@ -6,9 +6,14 @@ namespace BusinessApplicationProject
 {
     public class Project
     {
-        public List<Module> Modules { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Version { get; set; }
 
-        public void Build(CompileSettings compileSettings)
+        public Stage LoginStage { get; set; }
+        public List<Stage> Stages { get; set; }
+
+        public void Build(params CompileSettings[] compileSettings)
         {
 
         }
