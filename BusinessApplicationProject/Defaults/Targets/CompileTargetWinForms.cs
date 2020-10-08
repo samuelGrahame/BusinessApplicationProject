@@ -21,11 +21,14 @@ namespace BusinessApplicationProject.Defaults.Targets
             var builder = new StringBuilder();
             // a stage in winforms is a form.
             // lets create the form code.
+            
+            builder.AppendLine($"using System.Windows.Forms;");
+            builder.AppendLine();
 
-            builder.AppendLine($"public class frm{stage.Name}");
+            builder.AppendLine($"public class frm{stage.Name} : Form");
             builder.AppendLine("{");
 
-            builder.AppendLine($"\tpublic frm{stage.Name}");
+            builder.AppendLine($"\tpublic frm{stage.Name}()");
             builder.AppendLine("\t{");
 
             var properties = stage.GetType().GetProperties();
@@ -68,8 +71,10 @@ namespace BusinessApplicationProject.Defaults.Targets
             {
                 var name = list[i];
                 builder.AppendLine($"\t\t{name}.Dock = DockStyle.Top;");
+                builder.AppendLine($"\t\t{name}.TabIndex = {i};");
 
                 builder.AppendLine($"\t\tthis.Controls.Add({name});");
+                builder.AppendLine();
             }
             
             builder.AppendLine("\t}");

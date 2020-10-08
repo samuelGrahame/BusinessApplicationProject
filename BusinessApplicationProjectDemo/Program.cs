@@ -2,6 +2,7 @@
 using BusinessApplicationProject.Defaults;
 using BusinessApplicationProject.Defaults.Targets;
 using System;
+using System.Windows.Forms;
 
 namespace BusinessApplicationProjectDemo
 {
@@ -9,6 +10,8 @@ namespace BusinessApplicationProjectDemo
     {
         static void Main(string[] args)
         {
+
+
             var project = new Project();
             var loginStage = new MyLoginStage();
 
@@ -18,9 +21,14 @@ namespace BusinessApplicationProjectDemo
 
             project.Build(new CompileSettings()
             {
-                Path = "Output",
+                Path = "../../../",
                 Target = new CompileTargetWinForms()
             });
+
+            var login = new frmLogin();
+
+            Application.EnableVisualStyles();
+            Application.Run(login);
         }
 
         public class MyLoginStage : StageDefaultLogin
