@@ -8,7 +8,7 @@ namespace BusinessApplicationProject.Defaults
     {
         public string Username { get; set; }
         public string Password { get; set; }
-
+        
         public StageDefaultLogin() : base()
         {
             base.Description = "Default Login Stage";
