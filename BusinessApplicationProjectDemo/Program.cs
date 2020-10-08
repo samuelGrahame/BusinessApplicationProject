@@ -9,9 +9,7 @@ namespace BusinessApplicationProjectDemo
     class Program
     {
         static void Main(string[] args)
-        {
-
-
+        {            
             var project = new Project();
             var loginStage = new MyLoginStage();
 
@@ -23,6 +21,9 @@ namespace BusinessApplicationProjectDemo
             {
                 Path = "../../../",
                 Target = new CompileTargetWinForms()
+                {
+                    FlowControlName = "BusinessApplicationProjectDemo.StackPanel"
+                }           
             });
 
             var login = new frmLogin();

@@ -8,7 +8,7 @@ namespace BusinessApplicationProject
     public class CompileSettings
     {
         public ICompileTarget Target { get; set; }
-        public string Path { get; set; }
+        public string Path { get; set; }        
     }
 
     

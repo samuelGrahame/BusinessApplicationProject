@@ -4,6 +4,12 @@ public class frmLogin : Form
 {
 	public frmLogin()
 	{
+		this.Text = "Login";
+
+		var __flowLayoutPanel = new BusinessApplicationProjectDemo.StackPanel();
+		__flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+		__flowLayoutPanel.Dock = DockStyle.Fill;
+
 		TextBox txtUsername = new TextBox();
 
 		TextBox txtPassword = new TextBox();
@@ -11,17 +17,15 @@ public class frmLogin : Form
 		Button btnLogin = new Button();
 		btnLogin.Text = "Login";
 
-		btnLogin.Dock = DockStyle.Top;
-		btnLogin.TabIndex = 2;
-		this.Controls.Add(btnLogin);
-
-		txtPassword.Dock = DockStyle.Top;
-		txtPassword.TabIndex = 1;
-		this.Controls.Add(txtPassword);
-
-		txtUsername.Dock = DockStyle.Top;
 		txtUsername.TabIndex = 0;
-		this.Controls.Add(txtUsername);
+		__flowLayoutPanel.Controls.Add(txtUsername);
 
+		txtPassword.TabIndex = 1;
+		__flowLayoutPanel.Controls.Add(txtPassword);
+
+		btnLogin.TabIndex = 2;
+		__flowLayoutPanel.Controls.Add(btnLogin);
+
+		this.Controls.Add(__flowLayoutPanel);
 	}
 }

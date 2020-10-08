@@ -8,7 +8,9 @@ using System.Text;
 namespace BusinessApplicationProject.Defaults.Targets
 {
     public class CompileTargetWinForms : ICompileTarget
-    {        
+    {
+        public string FlowControlName { get; set; }
+
         public void CompileStage(CompileSettings compileSettings, Stage stage, Project project)
         {
             if (stage == null)
@@ -33,6 +35,17 @@ namespace BusinessApplicationProject.Defaults.Targets
 
             var properties = stage.GetType().GetProperties();
             var list = new List<string>();
+
+            string flowType = string.IsNullOrWhiteSpace(FlowControlName) ? "FlowLayoutPanel" : FlowControlName;
+
+            builder.AppendLine($"\t\tthis.Text = \"{stage.Name}\";");
+            builder.AppendLine();
+
+            builder.AppendLine($"\t\tvar __flowLayoutPanel = new {flowType}();");
+            builder.AppendLine("\t\t__flowLayoutPanel.FlowDirection = FlowDirection.TopDown;");
+            builder.AppendLine("\t\t__flowLayoutPanel.Dock = DockStyle.Fill;");
+
+            builder.AppendLine();
 
             foreach (var item in properties)
             {
@@ -66,17 +79,18 @@ namespace BusinessApplicationProject.Defaults.Targets
 
                 list.Add(buttonName);
             }
-
-            for (int i = list.Count - 1; i >= 0; i--)
+            for (int i = 0; i < list.Count; i++)
             {
                 var name = list[i];
-                builder.AppendLine($"\t\t{name}.Dock = DockStyle.Top;");
+
                 builder.AppendLine($"\t\t{name}.TabIndex = {i};");
 
-                builder.AppendLine($"\t\tthis.Controls.Add({name});");
+                builder.AppendLine($"\t\t__flowLayoutPanel.Controls.Add({name});");
                 builder.AppendLine();
             }
             
+            builder.AppendLine("\t\tthis.Controls.Add(__flowLayoutPanel);");
+
             builder.AppendLine("\t}");
 
             builder.AppendLine("}");
