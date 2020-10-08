@@ -40,10 +40,22 @@ namespace BusinessApplicationProject.Defaults.Targets
 
             builder.AppendLine("<body>");
 
+            if (UseBoostrap)
+            {
+                builder.AppendLine($"<div class=\"container-fluid\">");
+
+                builder.AppendLine("<nav class=\"navbar navbar-light bg-light\">");
+                builder.AppendLine($"<a class=\"navbar-brand\" href=\"#\">{stage.Name}</a>");
+                builder.AppendLine("</nav>");
+                builder.AppendLine("</div>");
+            }
+
             if (!string.IsNullOrWhiteSpace(DefaultContainerClass))
             {
-                builder.AppendLine($"<div class=\"{DefaultContainerClass}\">");
+                builder.AppendLine($"<div class=\"{DefaultContainerClass}\" style=\"margin-top:14px\">");
             }
+
+            builder.AppendLine("<form>");
 
             var properties = stage.GetType().GetProperties();
             
@@ -56,9 +68,25 @@ namespace BusinessApplicationProject.Defaults.Targets
                     //builder.AppendLine("\t}");
                     type = "Input";
                     namePrefix = "txt";
-                    
-                    builder.AppendLine($"<{type} type='text' name='{namePrefix}{item.Name}'/>");
-                    builder.AppendLine("</br>");
+                    var inputClass = "";
+
+                    if (UseBoostrap)
+                    {
+                        inputClass = $" class=\"form-control\"";
+
+                        builder.AppendLine("<div class=\"form-group\">");
+                        //<div class="form-group">
+                    }
+
+                    builder.AppendLine($"<{type}{inputClass} type='text' name='{namePrefix}{item.Name}'/>");
+                    if (!UseBoostrap)
+                    {
+                        builder.AppendLine("</br>");
+                    }                        
+                    else
+                    {
+                        builder.AppendLine("</div>");
+                    }
                 }
 
                 if (string.IsNullOrWhiteSpace(type))
@@ -70,13 +98,24 @@ namespace BusinessApplicationProject.Defaults.Targets
             foreach (var item in stage.Actions)
             {
                 var buttonName = $"btn{item.Key}";
-                builder.AppendLine($"<button name='{buttonName}'>{item.Key}</button>");                
+                var buttonClass = "";
+
+                if(UseBoostrap)
+                {
+                    buttonClass = $" class=\"btn btn-primary btn-block\"";
+                }
+
+                builder.AppendLine($"<button{buttonClass} name='{buttonName}'>{item.Key}</button>");
+                if(!UseBoostrap)
+                    builder.AppendLine("</br>");
             }
             
             if (!string.IsNullOrWhiteSpace(DefaultContainerClass))
             {
                 builder.AppendLine($"</div>");
             }
+
+            builder.AppendLine("</form>");
 
             builder.AppendLine("</body>");
 
