@@ -35,6 +35,7 @@ namespace BusinessApplicationProjectDemo
 
         public class MyLoginStage : StageDefaultLogin
         {
+            public string Email { get; set; }
             public override void Login()
             {
                 if(this.Username != "admin" || this.Password != "admin")

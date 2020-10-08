@@ -78,7 +78,7 @@ namespace BusinessApplicationProject.Defaults.Targets
                         //<div class="form-group">
                     }
 
-                    builder.AppendLine($"<{type}{inputClass} type='text' name='{namePrefix}{item.Name}'/>");
+                    builder.AppendLine($"<{type}{inputClass} placeholder='{item.Name}' type='text' name='{namePrefix}{item.Name}'/>");
                     if (!UseBoostrap)
                     {
                         builder.AppendLine("</br>");

@@ -10,6 +10,8 @@ public class frmLogin : Form
 		__flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
 		__flowLayoutPanel.Dock = DockStyle.Fill;
 
+		TextBox txtEmail = new TextBox();
+
 		TextBox txtUsername = new TextBox();
 
 		TextBox txtPassword = new TextBox();
@@ -17,13 +19,16 @@ public class frmLogin : Form
 		Button btnLogin = new Button();
 		btnLogin.Text = "Login";
 
-		txtUsername.TabIndex = 0;
+		txtEmail.TabIndex = 0;
+		__flowLayoutPanel.Controls.Add(txtEmail);
+
+		txtUsername.TabIndex = 1;
 		__flowLayoutPanel.Controls.Add(txtUsername);
 
-		txtPassword.TabIndex = 1;
+		txtPassword.TabIndex = 2;
 		__flowLayoutPanel.Controls.Add(txtPassword);
 
-		btnLogin.TabIndex = 2;
+		btnLogin.TabIndex = 3;
 		__flowLayoutPanel.Controls.Add(btnLogin);
 
 		this.Controls.Add(__flowLayoutPanel);
