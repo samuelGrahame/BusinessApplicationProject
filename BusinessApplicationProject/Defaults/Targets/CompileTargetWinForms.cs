@@ -7,9 +7,7 @@ using System.Text;
 namespace BusinessApplicationProject.Defaults.Targets
 {
     public class CompileTargetWinForms : ICompileTarget
-    {
-        public string OutputFolder => "WinForms";
-
+    {        
         public void CompileStage(CompileSettings compileSettings, Stage stage, Project project)
         {
             if (stage == null)
@@ -58,7 +56,7 @@ namespace BusinessApplicationProject.Defaults.Targets
 
             builder.AppendLine("}");
 
-            File.WriteAllText(Path.Combine(compileSettings.Path, OutputFolder, $"frm{stage.Name}.cs"), builder.ToString());
+            File.WriteAllText(Path.Combine(compileSettings.Path, $"frm{stage.Name}.cs"), builder.ToString());
         }
     }
 }
