@@ -14,6 +14,7 @@ namespace BusinessApplicationProjectDemo
             var loginStage = new MyLoginStage();
 
             project.Stages.Add(loginStage);
+            project.Stages.Add(new TestStage());
 
             project.LoginStage = loginStage;
 
@@ -24,12 +25,12 @@ namespace BusinessApplicationProjectDemo
                 {
                     FlowControlName = "BusinessApplicationProjectDemo.StackPanel"
                 }           
+            },
+            new CompileSettings()
+            {
+                Path = "../../../wwwroot",
+                Target = new CompileTargetHTML()
             });
-
-            var login = new frmLogin();
-
-            Application.EnableVisualStyles();
-            Application.Run(login);
         }
 
         public class MyLoginStage : StageDefaultLogin
@@ -42,5 +43,25 @@ namespace BusinessApplicationProjectDemo
                 }
             }
         }
+
+        public class TestStage : Stage
+        {
+
+            public string FirstName { get; set; }
+            
+            public TestStage()
+            {
+                this.Name = "Test";
+                this.Actions.Add("Test", TestFunc);
+            }
+
+
+            public void TestFunc()
+            {
+
+            }
+        }
+
+
     }
 }

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\BusinessApplicationProject\BusinessApplicationProject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
