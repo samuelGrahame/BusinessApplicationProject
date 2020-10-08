@@ -34,21 +34,24 @@ namespace BusinessApplicationProject.Defaults.Targets
             foreach (var item in properties)
             {
                 string type = "";
+                string namePrefix = "";
                 if(item.PropertyType == typeof(string))
                 {
                     //builder.AppendLine("\t}");
                     type = "TextBox";
+                    namePrefix = "txt";
                 }
 
                 if (string.IsNullOrWhiteSpace(type))
                 {
                     throw new Exception($"Type not supported: {item.PropertyType.ToString()}");
                 }
+                var controlName = $"{namePrefix}{item.Name}";
 
-                builder.AppendLine($"\t\t{type} {item.Name} = new {type}();");
+                builder.AppendLine($"\t\t{type} {controlName} = new {type}();");
                 builder.AppendLine();
 
-                list.Add(item.Name);
+                list.Add(controlName);
             }
 
             foreach (var item in stage.Actions)
