@@ -6,12 +6,12 @@ namespace BusinessApplicationProject
 {
     public class Stage
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name;
+        public string Description;
 
-        public bool IsPublic { get; set; }
+        public bool IsPublic;
 
-        public Dictionary<string, Action> Actions { get; set; } = new Dictionary<string, Action>();
+        public Dictionary<string, Action> Actions = new Dictionary<string, Action>();
     }
 }
 

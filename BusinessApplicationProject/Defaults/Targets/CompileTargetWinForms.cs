@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace BusinessApplicationProject.Defaults.Targets
@@ -28,6 +29,7 @@ namespace BusinessApplicationProject.Defaults.Targets
             builder.AppendLine("\t{");
 
             var properties = stage.GetType().GetProperties();
+            var list = new List<string>();
 
             foreach (var item in properties)
             {
@@ -44,17 +46,35 @@ namespace BusinessApplicationProject.Defaults.Targets
                 }
 
                 builder.AppendLine($"\t\t{type} {item.Name} = new {type}();");
+                builder.AppendLine();
+
+                list.Add(item.Name);
             }
 
             foreach (var item in stage.Actions)
             {
-                builder.AppendLine($"\t\tButton btn{item.Key} = new Button();");
-                builder.AppendLine($"\t\tbtn{item.Key}.Text = \"{item.Key}\";");
+                var buttonName = $"btn{item.Key}";
+                builder.AppendLine($"\t\tButton {buttonName} = new Button();");
+                builder.AppendLine($"\t\t{buttonName}.Text = \"{item.Key}\";");
+                builder.AppendLine();
+
+                list.Add(buttonName);
             }
 
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                var name = list[i];
+                builder.AppendLine($"\t\t{name}.Dock = DockStyle.Top;");
+
+                builder.AppendLine($"\t\tthis.Controls.Add({name});");
+            }
+            
             builder.AppendLine("\t}");
 
             builder.AppendLine("}");
+
+            if (!Directory.Exists(compileSettings.Path))
+                Directory.CreateDirectory(compileSettings.Path);
 
             File.WriteAllText(Path.Combine(compileSettings.Path, $"frm{stage.Name}.cs"), builder.ToString());
         }
